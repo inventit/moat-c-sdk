@@ -35,6 +35,11 @@ parser.add_option("--name",
     dest="package_name",
     help="Package name of your M2M/IoT application")
 
+parser.add_option("--version",
+    action="store",
+    dest="package_version",
+    help="Package version")
+
 parser.add_option("--token",
     action="store",
     dest="token_path",
@@ -152,8 +157,8 @@ def generate_dev_certs(cert_path, package_name):
   if not keystore.export_pem():
     error_exit('failed to export a certificate.')
 
-def generate_package_json(moat_path, package_name):
-  package = moatutils.package(moat_path.MOAT_ROOT, package_name)
+def generate_package_json(moat_path, package_name, version):
+  package = moatutils.package(moat_path.MOAT_ROOT, package_name, version)
   meta_path = os.path.join(moat_path.RESOURCES_PATH, 'package.json')
   if not os.path.isfile(meta_path):
     package.gen_metafile(moat_path.RESOURCES_PATH)
@@ -193,8 +198,11 @@ def configure_moat(o):
     error_exit(msg, True)
   print 'MOAT package name: ' + package_name
   o['variables']['package_name'] = package_name
+  version = options.package_version
+  if not version:
+    version = '1.0.0'
   generate_dev_certs(moat_path.CERTS_PATH, package_name)
-  generate_package_json(moat_path, package_name)
+  generate_package_json(moat_path, package_name, version)
   generate_skeleton(moat_path, package_name)
 
 def configure_app(o):

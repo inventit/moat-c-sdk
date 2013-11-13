@@ -178,11 +178,18 @@ class keystore:
       return False
     return True
 
+class MetaFormatError(Exception):
+  def __init__(self, err):
+    self.err = err
+  def __str__(self):
+    return repr(self.err)
+
 class package:
-  def __init__(self, root, package_name):
+  def __init__(self, root, package_name, version=None):
     self.deploy_to = root
     self.package_name = package_name
-    self.path = os.path.join(self.deploy_to, self.package_name + '.zip')
+    self.version = version
+    self.path = None
 
   def gen_metafile(self, path):
     meta_path = os.path.join(path, 'package.json')
@@ -193,7 +200,7 @@ class package:
       has_od = False
     if has_od:
       meta['name'] = self.package_name
-      meta['version'] = '[version]'
+      meta['version'] = self.version
       meta['description'] = '[description]'
       maintainers = collections.OrderedDict({ 'name' : '[name]', 'email' : '[email]'})
       meta['maintainers'] = [maintainers]
@@ -204,7 +211,7 @@ class package:
     else:
       data = '''{
 \t"name" : "%s",
-\t"version" : "[version]",
+\t"version" : "%s",
 \t"description" : "[description]",
 \t"maintainers" : [
 \t\t{ "name" : "[name]", "email" : "[email]" }
@@ -214,16 +221,50 @@ class package:
 \t},
 \t"main" : "%s.so",
 \t"models" : {}
-}''' %(self.package_name, self.package_name)
+}''' %(self.package_name, self.version, self.package_name)
     f = open(meta_path, 'w')
     f.write(data + '\n')
     return True
 
-  def archive(self, path):
-    print 'archinving to %s' %(self.path)
+  def load_metafile(self, path):
+    f = open(path, 'r')
+    err = None
+    try:
+      data = json.loads(f.read())
+      name = None
+      try:
+        name = data["name"]
+        self.version = data["version"]
+        models = data["models"]
+      except KeyError, e:
+        err = '"%s" is missing' %(e)
+        raise MetaFormatError(err)
+      if not err:
+        if len(models) == 0:
+          err = 'need to define at least one model'
+          raise MetaFormatError(err)
+        if name != self.package_name:
+          err = 'name is not match'
+          raise MetaFormatError(err)
+    except ValueError, e:
+      err = 'ValueError:%s' %(e)
+      raise MetaFormatError(err)
+    finally:
+      f.close()
+    return True
+
+  def archive(self, path, arch):
+    if arch == 'x64':
+      arch = 'x86_64'
+    elif arch == 'ia32':
+      arch = 'i386'
+    elif arch == 'arm':
+      arch = 'arm'
+    pkg_path = os.path.join(self.deploy_to, self.package_name + '_' + self.version + '_' + arch + '.zip')
+    print 'archinving to %s' %(pkg_path)
     cwd = os.getcwd()
     os.chdir(path)
-    zip = zipfile.PyZipFile(self.path, mode='w')
+    zip = zipfile.PyZipFile(pkg_path, mode='w')
     try:
       for root, dirs, files in os.walk(path):
         for f in files:
@@ -232,6 +273,7 @@ class package:
     finally:
       zip.close()
     os.chdir(cwd)
+    self.path = pkg_path
     return True
 
   def sign(self, store_path):

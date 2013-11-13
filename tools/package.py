@@ -101,6 +101,7 @@ def run(args):
   target_defaults = conf['target_defaults']
   package_name = variables.get('package_name')
   token_path = variables.get('token_path')
+  arch = variables.get('target_arch')
 
   print 'creating a package of ' + package_name + '...'
   library_path = os.path.join(moat_root, 'out', target_defaults.get('default_configuration'), 'lib.target')
@@ -108,7 +109,13 @@ def run(args):
   token = moatutils.token(tmp_token_path)
   keystore = moatutils.keystore(moat_path.CERTS_PATH, package_name)
   package = moatutils.package(moat_path.MOAT_ROOT, package_name)
-
+  meta_path = os.path.join(moat_path.RESOURCES_PATH, 'package.json')
+  if not os.path.isfile(meta_path):
+    error_exit('\n  package.json cound not found.\n')
+  try:
+    package.load_metafile(meta_path)
+  except moatutils.MetaFormatError, e:
+    error_exit('\n  package.json Format Error\n' + e.err)
   copy_resources(moat_path.RESOURCES_PATH, moat_path.PACKAGE_PATH, token_path, tmp_token_path)
   copy_library(library_path, package_name, moat_path.PACKAGE_PATH)
   verify_token(token, os.path.join(moat_path.CERTS_PATH, 'moat.pem'))
@@ -117,7 +124,7 @@ def run(args):
     os.unlink(tmp_token_path)
   except OSError, e:
     if e.errno != errno.ENOENT: raise
-  if not package.archive(moat_path.PACKAGE_PATH):
+  if not package.archive(moat_path.PACKAGE_PATH, arch):
     error_exit('failed to archive')
   if not package.sign(keystore.path):
     error_exit('failed to sign')
