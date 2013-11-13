@@ -4,8 +4,8 @@ MOAT C SDK
 This is a Software Development Kit enabling you to develop MOAT C client application.
 
 ## What is MOAT C?
-[MOAT C](http://dev.yourinventit.com/references/moat-c-api-document) is a C API to build a client side application interacting with cloud server.
-It is a part of [MOAT IoT](http://dev.yourinventit.com/guides/moat-iot), which is a specification set of creating IoT/M2M applications running on Inventit® ServiceSync environment.
+[MOAT C](http://dev.inventit.io/references/moat-c-api-document.html) is a C API to build a client side application interacting with cloud server.
+It is a part of [MOAT IoT](http://dev.inventit.io/guides/moat-iot.html), which is a specification set of creating IoT/M2M applications running on Inventit® ServiceSync environment.
 
 *****
 The library offers you:
@@ -25,14 +25,16 @@ The library offers you:
 
 ### 2. Deploy your security token into SDK
 Copy the downloaded security token into '${SDK_ROOT}/package' as 'token.bin'
+
     $ cp 1363966226152-token.bin ${SDK_ROOT}/package/token.bin
 
 ### 3. Configure and write code
 Perform the 'configure' command
+
     $ cd ${SDK_ROOT}
     $ ./configure
-Then, a template source code is deployed in ${SDK_ROOT}/src/${PACKAGE_NAME}.c
-Write your application code.
+Then, a template source code is deployed in ${SDK_ROOT}/src/${PACKAGE_NAME}.c.
+
 
 #### configure options
     $ ./configure --help
@@ -45,7 +47,7 @@ Write your application code.
       --token=TOKEN_PATH   Path to the security token file. Default path is
                           './package/token.bin'
 
-#### Cross compile (example)
+#### Cross compile (example for arm-linux-gnueabi)
     $ export CROSS=arm-linux-gnueabi-
     $ export CC=${CROSS}gcc
     $ export CXX=${CROSS}g++
@@ -62,6 +64,7 @@ Write your application code.
 ### 5. Deploy onto Inventit IoT Developer Network(IIDN) Sandbox Server.
 You can deploy the created package onto Inventit IoT Developer Network(IIDN) Sandbox Server.
 Visit [IIDN site](http://dev.yourinventit.com) 
+
     $ sh $CLI/iidn bindeploy simple-example.zip
 
 ## Where can you deploy?
@@ -89,3 +92,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 * Initial Release.
 
+1.0.1 : November 13, 2013
+
+* update header version to 1.0.3
+* add *version*_*arch* to the generated package file name 
+* minor bug fix
