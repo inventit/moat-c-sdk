@@ -53,6 +53,7 @@ MOAT_API sse_int moat_register_model_with_desc(Moat in_moat, sse_char *in_model_
 MOAT_API sse_int moat_unregister_model(Moat in_moat, sse_char *in_model_name);
 #define moat_remove_model(moat, model)		moat_unregister_model(moat, model)
 MOAT_API sse_int moat_send_notification(Moat in_moat, sse_char *in_urn, sse_char *in_key, sse_char *in_model_name, MoatObject *collection, MoatNotifyResultProc in_proc, sse_pointer in_user_data);
+MOAT_API sse_int moat_start_async_command(Moat in_moat, sse_char *in_uid, sse_char *in_key, MoatValue *in_data, MoatCommandProc in_proc, sse_pointer in_model_context);
 MOAT_API void moat_set_user_data(Moat in_moat, sse_pointer user_data);
 MOAT_API sse_pointer moat_get_user_data(Moat in_moat);
 

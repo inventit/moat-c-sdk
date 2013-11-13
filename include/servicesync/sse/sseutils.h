@@ -21,8 +21,11 @@
 
 SSE_BEGIN_C_DECLS
 
+#define sse_is_digit(c)					((c) >= '0' && (c) <= '9')
 #define sse_is_upper_case(c)			((c) >= 'A' && (c) <= 'Z')
 #define sse_is_lower_case(c)			((c) >= 'a' && (c) <= 'z')
+#define sse_is_alpha(c)					(sse_is_upper_case((c)) || sse_is_lower_case((c)))
+#define sse_is_alpha_or_digit(c)		(sse_is_digit((c)) || sse_is_alpha((c)))
 
 sse_char *sse_strcpy(sse_char *s1, const sse_char *s2);
 sse_char * sse_strncpy(sse_char *s1, const sse_char *s2, sse_size n);
@@ -55,6 +58,9 @@ void * sse_memdup(void *in_buff, sse_size in_size);
 
 sse_char sse_to_lower_case(const sse_char in_c);
 sse_char sse_to_upper_case(const sse_char in_c);
+
+sse_char * sse_encode_url(sse_char *str);
+sse_char * sse_decode_url(sse_char *str);
 
 #ifndef	SSE_CONFIG_ENABLE_MEMORY_DEBUG
 sse_pointer sse_malloc(sse_size size);

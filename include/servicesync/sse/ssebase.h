@@ -47,6 +47,8 @@ typedef sse_int (*SSECompareProc)(sse_pointer a, sse_pointer b);
 #define SSE_E_ACCES			(-9)
 #define SSE_E_TIMEDOUT		(-10)
 #define SSE_E_INTR			(-11)
+#define SSE_E_NOTCONN		(-12)
+#define SSE_E_PROTO			(-13)
 
 #define SSE_INT16_MIN	(-32767 - 1)
 #define SSE_INT16_MAX	(32767)
@@ -65,7 +67,7 @@ typedef sse_int (*SSECompareProc)(sse_pointer a, sse_pointer b);
 #define SSE_LOG_TYPE_SYMBOL_DEBUG	"DEBUG"
 #define SSE_LOG_TYPE_SYMBOL_TRACE	"TRACE"
 
-#define SSE_LOG(category, type, tag, format, ...)	ssep_log_print(category, "[" type "]" tag " %s:%s():L%d " format, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+#define SSE_LOG(category, type, tag, format, ...)	ssep_log_print(category, "[" type "] " tag " %s():L%d " format, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #ifdef SSE_LOG_ENABLE_ERROR
 #define SSE_LOG_ERROR(tag, format, ...)	SSE_LOG(SSE_LOG_CATEGORY_ERROR, SSE_LOG_TYPE_SYMBOL_ERROR, tag, format, ##__VA_ARGS__)
@@ -102,5 +104,16 @@ typedef sse_int (*SSECompareProc)(sse_pointer a, sse_pointer b);
 #define SSE_TRACE_EXIT()			SSE_LOG_TRACE(SSE_TAG, "exit")
 
 #define SSE_ASSERT(cond)			((cond) ? (void)0 : SSE_LOG_DEBUG("ASSERTION FAILED:" ##cond))
+
+enum event_boundary_ {
+	SSE_EVENT_MIN_ID = 1,
+	SSE_EVENT_MAX_ID = 100,
+	SSEGW_EVENT_MIN_ID = SSE_EVENT_MAX_ID + 1,
+	SSEGW_EVENT_MAX_ID = 200,
+	SSE_AUX_EVENT_MIN_ID = SSEGW_EVENT_MAX_ID + 1,
+	SSE_AUX_EVENT_MAX_ID = 300,
+	SSE_USER_EVENT_MIN_ID = 1001,
+	SSE_EVENT_BOUNDARYs
+};
 
 #endif /* SSEBASE_H__ */

@@ -38,7 +38,6 @@
 
 /* SSL configuration */
 #define SSE_CONFIG_ENABLE_SSL
-#define SSE_CONFIG_DISABLE_CERT_ERROR
 
 /* debug configuration */
 #define SSE_ENABLE_DEBUG
@@ -72,9 +71,9 @@ typedef int sse_int;
 typedef unsigned int sse_uint;
 typedef char sse_char;
 typedef unsigned char sse_uchar;
-typedef sse_uint32 sse_size;
-typedef sse_int32 sse_ssize;
-typedef sse_int sse_bool;	// todo
+typedef unsigned long sse_size;
+typedef long sse_ssize;
+typedef sse_int sse_bool;
 typedef void* sse_pointer;
 
 #ifdef _WIN32
