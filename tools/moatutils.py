@@ -227,7 +227,8 @@ class package:
     try:
       for root, dirs, files in os.walk(path):
         for f in files:
-          zip.write(f)
+          relpath = os.path.relpath(os.path.join(root, f), path)
+          zip.write(relpath)
     finally:
       zip.close()
     os.chdir(cwd)
