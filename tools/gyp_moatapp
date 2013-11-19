@@ -9,9 +9,12 @@ script_dir = os.path.dirname(__file__)
 moat_root  = os.path.normpath(os.path.join(script_dir, os.pardir))
 
 
-# Directory within which we want all generated files (including Makefiles)
-# to be written.
-output_dir = os.path.join(os.path.abspath(moat_root), 'out')
+def determine_target_arch(args):
+  arch = None
+  for arg in args:
+    if arg.find('-Dtarget_arch=') == 0:
+      arch = arg.replace('-Dtarget_arch=', '')
+  return arch
 
 def run_gyp(args):
   rc = gyp.main(args)
@@ -21,6 +24,15 @@ def run_gyp(args):
 
 if __name__ == '__main__':
   args = sys.argv[1:]
+
+  target_arch = determine_target_arch(args)
+  if not target_arch:
+    print 'Error no target_arch'
+    sys.exit(1)
+  # Directory within which we want all generated files (including Makefiles)
+  # to be written.
+  output_dir = os.path.join(os.path.abspath(moat_root), 'out')
+  output_dir = os.path.join(output_dir, target_arch)
 
   # GYP bug.
   # On msvs it will crash if it gets an absolute path.

@@ -104,7 +104,7 @@ def run(args):
   arch = variables.get('target_arch')
 
   print 'creating a package of ' + package_name + '...'
-  library_path = os.path.join(moat_root, 'out', target_defaults.get('default_configuration'), 'lib.target')
+  library_path = os.path.join(moat_root, 'out', arch, target_defaults.get('default_configuration'), 'lib.target')
   tmp_token_path = os.path.join(moat_path.PACKAGE_PATH, 'token.org')
   token = moatutils.token(tmp_token_path)
   keystore = moatutils.keystore(moat_path.CERTS_PATH, package_name)

@@ -1,7 +1,7 @@
 {
   'variables': {
-    'target_arch%': 'ia32',
-    'host_arch%': 'ia32',
+    'target_arch%': 'i386',
+    'host_arch%': 'i386',
     'library%': 'shared_library',
     'gcc_version%': 'unknown',
     'clang%': 0,
@@ -15,7 +15,7 @@
         'cflags': [ '-g', '-O0' ],
       },
       'Release': {
-        'cflags' : [ '-O2' ],
+        'cflags' : [ '-O2', '-fno-strict-aliasing' ],
       }
     },
     'include_dirs': [
@@ -27,11 +27,11 @@
         'cflags': [ '-Wall', ],
         'ldflags': [ '-rdynamic' ],
         'conditions': [
-          [ 'target_arch=="ia32"', {
+          [ 'target_arch=="i386"', {
             'cflags': [ '-m32' ],
             'ldflags': [ '-m32' ],
           }],
-          [ 'target_arch=="x64"', {
+          [ 'target_arch=="x86_64"', {
             'cflags': [ '-m64' ],
             'ldflags': [ '-m64' ],
           }],

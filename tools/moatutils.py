@@ -254,12 +254,6 @@ class package:
     return True
 
   def archive(self, path, arch):
-    if arch == 'x64':
-      arch = 'x86_64'
-    elif arch == 'ia32':
-      arch = 'i386'
-    elif arch == 'arm':
-      arch = 'arm'
     pkg_path = os.path.join(self.deploy_to, self.package_name + '_' + self.version + '_' + arch + '.zip')
     print 'archinving to %s' %(pkg_path)
     cwd = os.getcwd()
