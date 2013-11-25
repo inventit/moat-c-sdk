@@ -69,18 +69,18 @@ Perform the `configure` command
                            'default_configuration': 'Release',
                            'defines': [],
                            'include_dirs': [],
-                           'ldflags': [ '-L/home/tyano/devel/sdk/sdk/test/x86_64/lib'],
+                           'ldflags': [ '-L/path/to/moat-c-sdk/test/x86_64/lib'],
                            'libraries': [],
-                           'library_dirs': [ '/home/tyano/devel/sdk/sdk/test/x86_64/lib']},
+                           'library_dirs': [ '/path/to/moat-c-sdk/test/x86_64/lib']},
       'variables': { 'application_id': '2c57d062-437f-466e-8d1a-dbde43ccd88c',
                      'clang': 0,
                      'gcc_version': 45,
                      'host_arch': 'x86_64',
                      'package_name': 'simple-example',
                      'target_arch': 'x86_64',
-                     'token_path': '/home/tyano/devel/sdk/sdk/package/token.bin'}}
-    creating  /home/tyano/devel/sdk/sdk/config.gypi
-    creating  /home/tyano/devel/sdk/sdk/config.mk
+                     'token_path': '/path/to/moat-c-sdk/package/token.bin'}}
+    creating  /path/to/moat-c-sdk/config.gypi
+    creating  /path/to/moat-c-sdk/config.mk
     $ 
 
 #### configuration for cross-compilation
@@ -164,12 +164,12 @@ Perform `make` command to build your application
 
     $ make
     make -C out/x86_64 BUILDTYPE=Release V=
-    make[1]: Entering directory `/home/tyano/devel/sdk/sdk/out/x86_64'
-      CC(target) /home/tyano/devel/sdk/sdk/out/x86_64/Release/obj.target/simple-example/src/simple-example.o
-      SOLINK(target) /home/tyano/devel/sdk/sdk/out/x86_64/Release/obj.target/simple-example.so
-      SOLINK(target) /home/tyano/devel/sdk/sdk/out/x86_64/Release/obj.target/simple-example.so: Finished
-      COPY /home/tyano/devel/sdk/sdk/out/x86_64/Release/lib.target/simple-example.so
-    make[1]: Leaving directory `/home/tyano/devel/sdk/sdk/out/x86_64'
+    make[1]: Entering directory `/path/to/moat-c-sdk/out/x86_64'
+      CC(target) /path/to/moat-c-sdk/out/x86_64/Release/obj.target/simple-example/src/simple-example.o
+      SOLINK(target) /path/to/moat-c-sdk/out/x86_64/Release/obj.target/simple-example.so
+      SOLINK(target) /path/to/moat-c-sdk/out/x86_64/Release/obj.target/simple-example.so: Finished
+      COPY /path/to/moat-c-sdk/out/x86_64/Release/lib.target/simple-example.so
+    make[1]: Leaving directory `/path/to/moat-c-sdk/out/x86_64'
 
 For verbose output, you can specify `make V=1` option.
 
@@ -207,7 +207,7 @@ If the environment is configured for host PC, you can run your application on SD
     python tools/test.py --prepare
     copy /path/to/sdk/out/x86_64/Release/lib.target/simple-example.so to /path/to/sdk/test/x86_64/simple-example.so
     copy /path/to/sdk/package/package.json to /path/to/sdk/test/x86_64/package.json
-    creating  /home/tyano/devel/sdk/sdk/test/x86_64/.app-id
+    creating  /path/to/moat-c-sdk/test/x86_64/.app-id
 
 
     cd /path/to/sdk/test/x86_64
@@ -405,16 +405,16 @@ Perform 'make package' command.
 
     $ make package
     make -C out/x86_64 BUILDTYPE=Release V=
-    make[1]: Entering directory `/home/tyano/devel/sdk/sdk/out/x86_64'
+    make[1]: Entering directory `/path/to/moat-c-sdk/out/x86_64'
     make[1]: Nothing to be done for `all'.
-    make[1]: Leaving directory `/home/tyano/devel/sdk/sdk/out/x86_64'
+    make[1]: Leaving directory `/path/to/moat-c-sdk/out/x86_64'
     python tools/package.py
     creating a package of simple-example...
-    copying a file [/home/tyano/devel/sdk/sdk/out/x86_64/Release/lib.target/simple-example.so] into [/home/tyano/devel/sdk/sdk/.package]...
+    copying a file [/path/to/moat-c-sdk/out/x86_64/Release/lib.target/simple-example.so] into [/path/to/moat-c-sdk/.package]...
     verifying the token
-    signing /home/tyano/devel/sdk/sdk/.package/token.bin
-    archinving to /home/tyano/devel/sdk/sdk/simple-example_1.0_x86_64.zip
-    signing /home/tyano/devel/sdk/sdk/simple-example_1.0_x86_64.zip
+    signing /path/to/moat-c-sdk/.package/token.bin
+    archinving to /path/to/moat-c-sdk/simple-example_1.0_x86_64.zip
+    signing /path/to/moat-c-sdk/simple-example_1.0_x86_64.zip
 
 If the command is successful, the package file is generated in `${SDK_ROOT}/${PACKAGE_NAME}_${VERSION}_${TARGET_ARCH}.zip
 
