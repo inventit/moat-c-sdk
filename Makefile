@@ -32,7 +32,7 @@ package: all
 	$(PYTHON) tools/package.py
 
 clean:
-	-rm -rf $(OUTDIR)/Makefile moatapp moatapp_g $(OUTDIR)/$(BUILDTYPE)/*
+	-rm -rf $(OUTDIR)/$(BUILDTYPE)/*
 	-find $(OUTDIR)/ -name '*.o' -o -name '*.a' | xargs rm -rf
 
 distclean:

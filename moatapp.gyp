@@ -7,7 +7,7 @@
     {
       'target_name': '<(package_name)',
       'sources': [
-        'src/<(package_name).c'
+        'src/<(package_name).c',
        ],
       'product_prefix': '',
       'type': 'shared_library',
@@ -15,6 +15,7 @@
       'include_dirs' : [
       ],
       'libraries': [
+        '-lmoatapp',
       ],
       'dependencies': [
       ],

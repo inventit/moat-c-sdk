@@ -57,47 +57,57 @@ typedef sse_int (*SSECompareProc)(sse_pointer a, sse_pointer b);
 #define SSE_INT32_MAX	(2147483647)
 #define SSE_UINT32_MAX	(0xFFFFFFFF)
 
-#define SSE_SHA1_HASH_LENGTH	(20)
-
 #define SSE_ARRAY_SIZE(arr)			(sizeof((arr)) / sizeof((arr)[0]))
+#define SSE_MIN(a, b)           (((a) < (b)) ? (a) : (b))
+#define SSE_MAX(a, b)           (((a) > (b)) ? (a) : (b))
+#define SSE_ABS(a)              (((a) < 0) ? -(a) : (a))
 
-#define SSE_LOG_TYPE_SYMBOL_ERROR	"** ERROR **"
-#define SSE_LOG_TYPE_SYMBOL_WARN	"* WARNING *"
-#define SSE_LOG_TYPE_SYMBOL_INFO	"INFO"
-#define SSE_LOG_TYPE_SYMBOL_DEBUG	"DEBUG"
-#define SSE_LOG_TYPE_SYMBOL_TRACE	"TRACE"
+/* type of log for ssep_log_print() */
+enum sse_log_level {
+    SSE_LOG_LEVEL_ERROR,
+    SSE_LOG_LEVEL_WARN,
+    SSE_LOG_LEVEL_INFO,
+    SSE_LOG_LEVEL_DEBUG,
+    SSE_LOG_LEVEL_TRACE,
+    SSE_LOG_LEVELs
+};
+#define SSE_LOG_LABEL_ERROR	"** ERROR **"
+#define SSE_LOG_LABEL_WARN	"* WARNING *"
+#define SSE_LOG_LABEL_INFO	"INFO"
+#define SSE_LOG_LABEL_DEBUG	"DEBUG"
+#define SSE_LOG_LABEL_TRACE	"TRACE"
 
 #define SSE_LOG(category, type, tag, format, ...)	ssep_log_print(category, "[" type "] " tag " %s():L%d " format, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #ifdef SSE_LOG_ENABLE_ERROR
-#define SSE_LOG_ERROR(tag, format, ...)	SSE_LOG(SSE_LOG_CATEGORY_ERROR, SSE_LOG_TYPE_SYMBOL_ERROR, tag, format, ##__VA_ARGS__)
+#define SSE_LOG_ERROR(tag, format, ...)	SSE_LOG(SSE_LOG_LEVEL_ERROR, SSE_LOG_LABEL_ERROR, tag, format, ##__VA_ARGS__)
 #else /* SSE_LOG_ENABLE_ERROR */
 #define SSE_LOG_ERROR(tag, format, ...)
 #endif /* SSE_LOG_ENABLE_ERROR */
 
 #ifdef SSE_LOG_ENABLE_WARN
-#define SSE_LOG_WARN(tag, format, ...)	SSE_LOG(SSE_LOG_CATEGORY_WARN, SSE_LOG_TYPE_SYMBOL_WARN, tag, format, ##__VA_ARGS__)
+#define SSE_LOG_WARN(tag, format, ...)	SSE_LOG(SSE_LOG_LEVEL_WARN, SSE_LOG_LABEL_WARN, tag, format, ##__VA_ARGS__)
 #else /* SSE_LOG_ENABLE_WARN */
 #define SSE_LOG_WARN(tag, format, ...)
 #endif /* SSE_LOG_ENABLE_WARN */
 
 #ifdef SSE_LOG_ENABLE_INFO
-#define SSE_LOG_INFO(tag, format, ...)	SSE_LOG(SSE_LOG_CATEGORY_INFO, SSE_LOG_TYPE_SYMBOL_INFO, tag, format, ##__VA_ARGS__)
+#define SSE_LOG_INFO(tag, format, ...)	SSE_LOG(SSE_LOG_LEVEL_INFO, SSE_LOG_LABEL_INFO, tag, format, ##__VA_ARGS__)
 #else /* SSE_LOG_ENABLE_INFO */
 #define SSE_LOG_INFO(tag, format, ...)
 #endif /* SSE_LOG_ENABLE_INFO */
 
-#ifdef SSE_LOG_ENABLE_TRACE
-#define SSE_LOG_TRACE(tag, format, ...)	SSE_LOG(SSE_LOG_CATEGORY_TRACE, SSE_LOG_TYPE_SYMBOL_TRACE, tag, format, ##__VA_ARGS__)
-#else /* SSE_LOG_ENABLE_TRACE */
-#define SSE_LOG_TRACE(tag, format, ...)
-#endif /* SSE_LOG_ENABLE_TRACE */
-
 #ifdef SSE_LOG_ENABLE_DEBUG
-#define SSE_LOG_DEBUG(tag, format, ...)	SSE_LOG(SSE_LOG_CATEGORY_DEBUG, SSE_LOG_TYPE_SYMBOL_DEBUG, tag, format, ##__VA_ARGS__)
+#define SSE_LOG_DEBUG(tag, format, ...)	SSE_LOG(SSE_LOG_LEVEL_DEBUG, SSE_LOG_LABEL_DEBUG, tag, format, ##__VA_ARGS__)
 #else /* SSE_LOG_ENABLE_DEBUG */
 #define SSE_LOG_DEBUG(tag, format, ...)
 #endif /* SSE_LOG_ENABLE_DEBUG */
+
+#ifdef SSE_LOG_ENABLE_TRACE
+#define SSE_LOG_TRACE(tag, format, ...) SSE_LOG(SSE_LOG_LEVEL_TRACE, SSE_LOG_LABEL_TRACE, tag, format, ##__VA_ARGS__)
+#else /* SSE_LOG_ENABLE_TRACE */
+#define SSE_LOG_TRACE(tag, format, ...)
+#endif /* SSE_LOG_ENABLE_TRACE */
 
 #define SSE_TAG						"SSE"
 #define SSE_TRACE_ENTER()			SSE_LOG_TRACE(SSE_TAG, "enter")

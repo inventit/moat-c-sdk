@@ -461,3 +461,22 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 * remove stub code
 * add `apprunner` `apprunner_cli` tool for run/debug application on host PC
+
+1.0.3 : January 8, 2014
+
+* API enhancements (new api support)
+    * sse_string : string object
+    * sse_base64 : Base64 decoder/encoder
+    * sse_hashlib : MD5/SHA1/SHA256 hash
+    * moat_uuid : UUID (v1/v4) generator
+    * moat_url : URL object
+    * moat_httpc : HTTP client 
+    * moat_xxxloader : HTTP downloader/uploader
+    * moat_timer : Timer
+    * moat_event : app internal event service
+    * moat_io : I/O watcher/handler
+    * moat_idle : idle handler
+    * moat_periodic : periodic handler
+    * moat_json : JSON utility
+    * MOAT_LOG : logging macros
+

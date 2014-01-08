@@ -27,9 +27,20 @@
 #include <servicesync/sse/sselist.h>
 #include <servicesync/sse/ssequeue.h>
 #include <servicesync/sse/sseutils.h>
+#include <servicesync/sse/ssestring.h>
+#include <servicesync/sse/ssehashlib.h>
+#include <servicesync/sse/ssebase64.h>
 #include <servicesync/moat/moatvalue.h>
 #include <servicesync/moat/moatapi.h>
 #include <servicesync/moat/moatapp.h>
 #include <servicesync/moat/moatplugin.h>
+#include <servicesync/moat/moatevent.h>
+#include <servicesync/moat/moaturl.h>
+#include <servicesync/moat/moathttpc.h>
+#include <servicesync/moat/moattimer.h>
+#include <servicesync/moat/moatjson.h>
+#include <servicesync/moat/moatuuid.h>
+#include <servicesync/moat/moatlog.h>
+#include <servicesync/moat/moatutils.h>
 
 #endif /* MOAT_H_ */

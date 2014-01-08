@@ -55,6 +55,7 @@ void *sse_memcpy(void *buf1, const void *buf2, sse_size size);
 void *sse_memset(void *buf, sse_int32 ch, sse_size n);
 sse_int sse_memcmp(void *buf1, void *buf2, sse_size size);
 void * sse_memdup(void *in_buff, sse_size in_size);
+void * sse_memmove(void *out_d, void *in_s, sse_size in_size);
 
 sse_char sse_to_lower_case(const sse_char in_c);
 sse_char sse_to_upper_case(const sse_char in_c);
