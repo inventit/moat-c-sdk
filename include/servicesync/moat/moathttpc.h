@@ -23,7 +23,7 @@
 
 SSE_BEGIN_C_DECLS
 
-typedef struct HttpCliet_ MoatHttpClient;
+typedef struct HttpClient_ MoatHttpClient;
 typedef struct HttpRequest_ MoatHttpRequest;
 typedef struct HttpResponse_ MoatHttpResponse;
 
