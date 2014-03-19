@@ -28,6 +28,7 @@ SSEString * sse_string_alloc(sse_size in_size);
 SSEString * sse_string_new(sse_char *in_str);
 SSEString * sse_string_new_with_length(sse_char *in_str, sse_size len);
 SSEString * sse_string_new_from_array(sse_char *in_str_arr[], sse_int in_arr_size, sse_char *in_delim);
+SSEString * sse_string_clone(SSEString *self);
 sse_char * sse_string_free(SSEString *self, sse_bool in_free_cont);
 
 sse_int sse_string_set_cstr(SSEString *self, sse_char *in_str);

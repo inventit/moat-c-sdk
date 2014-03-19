@@ -25,7 +25,6 @@ typedef struct MoatValue_ MoatValue;
 typedef struct MoatObject_ MoatObject;
 typedef struct MoatObjectIterator_ MoatObjectIterator;
 
-typedef enum moat_value_type_ moat_value_type;
 enum moat_value_type_ {
 	MOAT_VALUE_TYPE_BOOLEAN,
 	MOAT_VALUE_TYPE_INT16,
@@ -46,6 +45,7 @@ enum moat_value_type_ {
 	MOAT_VALUE_TYPE_NULL,
 	MOAT_VALUE_TYPEs
 };
+typedef enum moat_value_type_ moat_value_type;
 
 MOAT_API MoatValue * moat_value_new(void);
 MOAT_API MoatValue * moat_value_clone(MoatValue *self);

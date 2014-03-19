@@ -63,6 +63,8 @@ sse_char sse_to_upper_case(const sse_char in_c);
 sse_char * sse_encode_url(sse_char *str);
 sse_char * sse_decode_url(sse_char *str);
 
+sse_pointer sse_zeroalloc(sse_size size);
+
 #ifndef	SSE_CONFIG_ENABLE_MEMORY_DEBUG
 sse_pointer sse_malloc(sse_size size);
 #else /* SSE_CONFIG_ENABLE_MEMORY_DEBUG */
