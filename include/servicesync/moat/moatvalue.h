@@ -41,6 +41,7 @@ enum moat_value_type_ {
 	MOAT_VALUE_TYPE_STRING,
 	MOAT_VALUE_TYPE_BINARY,
 	MOAT_VALUE_TYPE_RESOURCE,
+	MOAT_VALUE_TYPE_LIST,
 	MOAT_VALUE_TYPE_OBJECT,
 	MOAT_VALUE_TYPE_NULL,
 	MOAT_VALUE_TYPEs
@@ -62,6 +63,7 @@ MOAT_API sse_int moat_value_get_float(MoatValue *self, sse_float *out_float_val)
 MOAT_API sse_int moat_value_get_double(MoatValue *self, sse_double *out_double_val);
 MOAT_API sse_int moat_value_get_string(MoatValue *self, sse_char **out_str_val, sse_uint *out_len);
 MOAT_API sse_int moat_value_get_binary(MoatValue *self, sse_byte **out_bin_val, sse_uint *out_size);
+MOAT_API sse_int moat_value_get_list(MoatValue *self, SSESList **out_list_val);
 MOAT_API sse_int moat_value_get_object(MoatValue *self, MoatObject **out_obj_val);
 MOAT_API void moat_value_set_boolean(MoatValue *self, sse_bool in_bool_val);
 MOAT_API void moat_value_set_int16(MoatValue *self, sse_int16 in_int16_val);
@@ -72,6 +74,7 @@ MOAT_API void moat_value_set_double(MoatValue *self, sse_double in_double_val);
 MOAT_API void moat_value_set_null(MoatValue *self);
 MOAT_API sse_int moat_value_set_string(MoatValue *self, sse_char *in_str_val, sse_uint in_len, sse_bool in_dup);
 MOAT_API sse_int moat_value_set_binary(MoatValue *self, sse_byte *in_bin_val, sse_uint in_size, sse_bool in_dup);
+MOAT_API sse_int moat_value_set_list(MoatValue *self, SSESList *in_list_val, sse_bool in_dup);
 MOAT_API sse_int moat_value_set_object(MoatValue *self, MoatObject *in_obj_val, sse_bool in_dup);
 MOAT_API MoatValue * moat_value_new_boolean(sse_bool in_bool_val);
 MOAT_API MoatValue * moat_value_new_int16(sse_int16 in_int16_val);
@@ -81,6 +84,7 @@ MOAT_API MoatValue * moat_value_new_float(sse_float in_float_val);
 MOAT_API MoatValue * moat_value_new_double(sse_double in_double_val);
 MOAT_API MoatValue * moat_value_new_string(sse_char *in_str_val, sse_uint in_len, sse_bool in_dup);
 MOAT_API MoatValue * moat_value_new_binary(sse_byte *in_bin_val, sse_uint in_size, sse_bool in_dup);
+MOAT_API MoatValue * moat_value_new_list(SSESList *in_list_val, sse_bool in_dup);
 MOAT_API MoatValue * moat_value_new_object(MoatObject *in_obj_val, sse_bool in_dup);
 
 MOAT_API MoatObject * moat_object_new(void);
@@ -99,6 +103,7 @@ MOAT_API sse_int moat_object_add_float_value(MoatObject *self, sse_char *in_key,
 MOAT_API sse_int moat_object_add_double_value(MoatObject *self, sse_char *in_key, sse_double in_double_val, sse_bool in_overwrite);
 MOAT_API sse_int moat_object_add_string_value(MoatObject *self, sse_char *in_key, sse_char *in_str_val, sse_uint in_len, sse_bool in_dup, sse_bool in_overwrite);
 MOAT_API sse_int moat_object_add_binary_value(MoatObject *self, sse_char *in_key, sse_byte *in_bin_val, sse_uint in_size, sse_bool in_dup, sse_bool in_overwrite);
+MOAT_API sse_int moat_object_add_list_value(MoatObject *self, sse_char *in_key, SSESList *in_list_val, sse_bool in_dup, sse_bool in_overwrite);
 MOAT_API sse_int moat_object_add_object_value(MoatObject *self, sse_char *in_key, MoatObject *in_obj_val, sse_bool in_dup, sse_bool in_overwrite);
 MOAT_API sse_int moat_object_get_boolean_value(MoatObject *self, sse_char *in_key, sse_bool *out_bool_val);
 MOAT_API sse_int moat_object_get_int16_value(MoatObject *self, sse_char *in_key, sse_int16 *out_int16_val);
@@ -108,7 +113,8 @@ MOAT_API sse_int moat_object_get_float_value(MoatObject *self, sse_char *in_key,
 MOAT_API sse_int moat_object_get_double_value(MoatObject *self, sse_char *in_key, sse_double *out_double_val);
 MOAT_API sse_int moat_object_get_string_value(MoatObject *self, sse_char *in_key, sse_char **out_str_val, sse_uint *out_len);
 MOAT_API sse_int moat_object_get_binary_value(MoatObject *self, sse_char *in_key, sse_byte **out_bin_val, sse_uint *out_size);
-MOAT_API sse_int moat_object_get_object_value(MoatObject *self, sse_char *in_key, MoatObject **out_obj_va);
+MOAT_API sse_int moat_object_get_list_value(MoatObject *self, sse_char *in_key, SSESList **out_list_val);
+MOAT_API sse_int moat_object_get_object_value(MoatObject *self, sse_char *in_key, MoatObject **out_obj_val);
 
 MOAT_API MoatObjectIterator * moat_object_create_iterator(MoatObject *self);
 MOAT_API void moat_object_iterator_free(MoatObjectIterator *self);

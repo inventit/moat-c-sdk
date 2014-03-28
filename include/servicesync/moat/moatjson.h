@@ -23,6 +23,9 @@
 
 SSE_BEGIN_C_DECLS
 
+sse_int moat_json_string_to_moat_value(sse_char *in_json, sse_size in_len, MoatValue **out_val, sse_char **out_err_msg);
+sse_int moat_json_file_to_moat_value(sse_char *in_path, MoatValue **out_val, sse_char **out_err_msg);
+
 sse_int moat_json_string_to_moat_object(sse_char *in_json, sse_size in_len, MoatObject **out_obj, sse_char **out_err_msg);
 sse_int moat_json_file_to_moat_object(sse_char *in_path, MoatObject **out_obj, sse_char **out_err_msg);
 
