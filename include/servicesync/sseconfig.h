@@ -19,6 +19,16 @@
 #ifndef __SSE_CONFIG_H__
 #define __SSE_CONFIG_H__
 
+#define SSE_VERSION_MAJOR	(1)
+#define SSE_VERSION_MINOR	(0)
+#define SSE_VERSION_RELEASE	(4)
+#define SSE_VERSION_STRING	"1.0.4"
+
+#define SSE_SDK_VERSION_MAJOR	(1)
+#define SSE_SDK_VERSION_MINOR	(0)
+#define SSE_SDK_VERSION_RELEASE	(3)
+#define SSE_SDK_VERSION_STRING	"1.0.3"
+
 /* #define SSE_CONFIG_ENABLE_MEMORY_DEBUG */
 
 /* premitive data type configuration */
