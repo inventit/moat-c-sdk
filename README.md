@@ -447,20 +447,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Change History
 
-1.0.0 : June 6, 2013
-
-* Initial Release.
-
-1.0.1 : November 13, 2013
-
-* update header version to 1.0.3
-* add *version*_*arch* suffix to the generated package file name 
-* minor bug fix
-
-1.0.2 : November 19,2013
-
-* remove stub code
-* add `apprunner` `apprunner_cli` tool for run/debug application on host PC
+1.0.4 : July 10, 2014
+* new api (`moat_get_device_id()`, `moat_get_package_urn()`, `moat_create_notification_id_with_moat()`)
+* minor bug fixes
 
 1.0.3 : January 8, 2014
 
@@ -479,4 +468,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     * moat_periodic : periodic handler
     * moat_json : JSON utility
     * MOAT_LOG : logging macros
+
+1.0.2 : November 19,2013
+
+* remove stub code
+* add `apprunner` `apprunner_cli` tool for run/debug application on host PC
+
+1.0.1 : November 13, 2013
+
+* update header version to 1.0.3
+* add *version*_*arch* suffix to the generated package file name 
+* minor bug fix
+
+1.0.0 : June 6, 2013
+
+* Initial Release.
 
