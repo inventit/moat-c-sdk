@@ -64,6 +64,10 @@ MOAT_API sse_int moat_datastore_save_value(Moat in_moat, sse_char *in_key, MoatV
 MOAT_API sse_int moat_datastore_load_value(Moat in_moat, sse_char *in_key, MoatValue **out_value);
 MOAT_API sse_int moat_datastore_remove_value(Moat in_moat, sse_char *in_key);
 
+MOAT_API sse_int moat_get_device_id(Moat in_moat, sse_char **out_dev_id);
+MOAT_API sse_char * moat_get_package_urn(Moat in_moat);
+MOAT_API sse_char * moat_create_notification_id_with_moat(Moat in_moat, sse_char *in_service_name, sse_char *in_version);
+
 SSE_END_C_DECLS
 
 #endif /* MOAT_API_H_ */
